@@ -75,6 +75,22 @@ class LinkedList<T> {
     return this;
   }
 
+  shift(): LLNode<T> {
+    if (!this.head) {
+      return undefined;
+    }
+    let temp = this.head;
+    this.head = this.head.next;
+    temp.next = null;
+    this.length--;
+
+    if (this.length === 0) {
+      this.tail = null;
+    }
+
+    return temp;
+  }
+
   print() {
     let temp = this.head;
     while (temp) {
@@ -85,13 +101,20 @@ class LinkedList<T> {
 }
 
 const list = new LinkedList<number>(1);
-list.push(2).push(3).push(4);
+list.push(2).push(3).push(4).push(5);
 
-console.log(list.pop());
-console.log(list.pop());
-console.log(list.pop());
-console.log(list.pop());
-console.log(list.pop());
+console.log("pop", list.pop());
+console.log("pop", list.pop());
+console.log("pop", list.pop());
+console.log("pop", list.pop());
+console.log("pop", list.pop());
 
 list.unshift(1).unshift(2).unshift(3).unshift(4).unshift(5);
 console.log(list.print());
+
+console.log("shift", list.shift());
+console.log("shift", list.shift());
+console.log("shift", list.shift());
+console.log("shift", list.shift());
+console.log("shift", list.shift());
+console.log("shift", list.shift());
