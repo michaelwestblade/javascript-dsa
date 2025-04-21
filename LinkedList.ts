@@ -91,12 +91,26 @@ class LinkedList<T> {
     return temp;
   }
 
+  get(index: number): LLNode<T> {
+    if (index < 0 || index >= this.length) {
+      return undefined;
+    }
+    let temp = this.head;
+
+    for (let i = 0; i < index; i++) {
+      temp = temp.next;
+    }
+
+    return temp;
+  }
+
   print() {
     let temp = this.head;
     while (temp) {
       console.log(temp.value);
       temp = temp.next;
     }
+    return temp;
   }
 }
 
@@ -118,3 +132,6 @@ console.log("shift", list.shift());
 console.log("shift", list.shift());
 console.log("shift", list.shift());
 console.log("shift", list.shift());
+
+list.push(1).push(2).push(3).push(4).push(5);
+console.log("list.get(2)", list.get(2));
