@@ -104,7 +104,18 @@ class LinkedList<T> {
     return temp;
   }
 
+  set(index: number, value: T) {
+    let temp = this.get(index);
+    if (temp) {
+      temp.value = value;
+      return true;
+    }
+
+    return false;
+  }
+
   print() {
+    console.log("printing list");
     let temp = this.head;
     while (temp) {
       console.log(temp.value);
@@ -124,7 +135,7 @@ console.log("pop", list.pop());
 console.log("pop", list.pop());
 
 list.unshift(1).unshift(2).unshift(3).unshift(4).unshift(5);
-console.log(list.print());
+list.print();
 
 console.log("shift", list.shift());
 console.log("shift", list.shift());
@@ -135,3 +146,10 @@ console.log("shift", list.shift());
 
 list.push(1).push(2).push(3).push(4).push(5);
 console.log("list.get(2)", list.get(2));
+
+list.print();
+
+list.set(2, 0);
+list.print();
+list.set(2, 3);
+list.print();
