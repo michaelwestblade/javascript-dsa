@@ -1,6 +1,6 @@
-class Node<T> {
-  value: T | null = null;
-  next: Node<T> | null = null;
+class LLNode<T> {
+  public value: T | null = null;
+  public next: LLNode<T> | null = null;
 
   constructor(value: T) {
     this.value = value;
@@ -9,13 +9,13 @@ class Node<T> {
 }
 
 class LinkedList<T> {
-  head: Node<T> = null;
-  tail: Node<T> = null;
+  head: LLNode<T> = null;
+  tail: LLNode<T> = null;
   length: number = 0;
 
   constructor(value?: T) {
     if (value) {
-      const newNode = new Node<T>(value);
+      const newNode = new LLNode<T>(value);
       this.head = newNode;
       this.tail = this.head;
       this.length = 1;
@@ -23,7 +23,7 @@ class LinkedList<T> {
   }
 
   push(value: T) {
-    const newNode = new Node<T>(value);
+    const newNode = new LLNode<T>(value);
 
     if (!this.head) {
       this.head = newNode;
@@ -37,7 +37,7 @@ class LinkedList<T> {
     return this;
   }
 
-  pop(): Node<T> {
+  pop(): LLNode<T> {
     if (!this.head) {
       return undefined;
     }
@@ -60,6 +60,28 @@ class LinkedList<T> {
 
     return temp;
   }
+
+  unshift(value) {
+    const newNode = new LLNode<T>(value);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+
+    this.length++;
+    return this;
+  }
+
+  print() {
+    let temp = this.head;
+    while (temp) {
+      console.log(temp.value);
+      temp = temp.next;
+    }
+  }
 }
 
 const list = new LinkedList<number>(1);
@@ -70,3 +92,6 @@ console.log(list.pop());
 console.log(list.pop());
 console.log(list.pop());
 console.log(list.pop());
+
+list.unshift(1).unshift(2).unshift(3).unshift(4).unshift(5);
+console.log(list.print());
