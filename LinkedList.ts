@@ -114,6 +114,45 @@ class LinkedList<T> {
     return false;
   }
 
+  insert(index: number, value: T) {
+    if (index === 0) {
+      return this.unshift(value);
+    }
+    if (index === this.length - 1) {
+      return this.push(value);
+    }
+    if (index < 0 || index >= this.length) {
+      return false;
+    }
+
+    const newNode = new LLNode<T>(value);
+    const temp = this.get(index - 1);
+    newNode.next = temp.next;
+    temp.next = newNode;
+    return true;
+  }
+
+  remove(index: number): LLNode<T> {
+    if (index < 0 || index >= this.length) {
+      return undefined;
+    }
+
+    if (index === 0) {
+      return this.shift();
+    }
+
+    if (index === this.length - 1) {
+      return this.pop();
+    }
+
+    const before = this.get(index - 1);
+    const temp = before.next;
+    before.next = temp.next;
+    temp.next = null;
+    this.length--;
+    return temp;
+  }
+
   print() {
     console.log("printing list");
     let temp = this.head;
@@ -152,4 +191,9 @@ list.print();
 list.set(2, 0);
 list.print();
 list.set(2, 3);
+list.print();
+
+list.insert(2, -3);
+list.print();
+list.remove(2);
 list.print();
