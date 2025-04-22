@@ -129,6 +129,7 @@ class LinkedList<T> {
     const temp = this.get(index - 1);
     newNode.next = temp.next;
     temp.next = newNode;
+    this.length++;
     return true;
   }
 
@@ -151,6 +152,22 @@ class LinkedList<T> {
     temp.next = null;
     this.length--;
     return temp;
+  }
+
+  reverse() {
+    let temp = this.head;
+    this.head = this.tail;
+    this.tail = temp;
+    let next = temp.next;
+    let prev = null;
+
+    for (let i = 0; i < this.length; i++) {
+      next = temp.next;
+      temp.next = prev;
+      prev = temp;
+      temp = next;
+    }
+    return this;
   }
 
   print() {
@@ -196,4 +213,6 @@ list.print();
 list.insert(2, -3);
 list.print();
 list.remove(2);
+
+list.reverse();
 list.print();
